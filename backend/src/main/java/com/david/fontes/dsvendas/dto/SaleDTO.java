@@ -1,41 +1,40 @@
-package com.david.fontes.dsvendas.entities;
+package com.david.fontes.dsvendas.dto;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import com.david.fontes.dsvendas.entities.Sale;
 
-@Entity
-@Table(name = "tb_sales")
-public class Sale {
+public class SaleDTO implements Serializable{
+	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private Integer visited;
 	private Integer deals;
 	private Double amount;
 	private LocalDate date;
 	
-	@ManyToOne
-	@JoinColumn(name = "seller_id")
-	private Seller seller;
-
-	public Sale() {
-	}
+	private SellerDTO seller;
 	
-	public Sale(Long id, Integer visited, Integer deals, Double amount, LocalDate date, Seller seller) {
+	public SaleDTO(Long id, Integer visited, Integer deals, Double amount, LocalDate date, SellerDTO seller) {
 		this.id = id;
 		this.visited = visited;
 		this.deals = deals;
 		this.amount = amount;
 		this.date = date;
 		this.seller = seller;
+	}
+	
+	public SaleDTO() {
+	}
+	
+	public SaleDTO(Sale sale) {
+		this.id = sale.getId();
+		this.visited = sale.getVisited();
+		this.deals = sale.getDeals();
+		this.amount = sale.getAmount();
+		this.date = sale.getDate();
+		this.seller = new SellerDTO(sale.getSeller());
 	}
 
 	public Long getId() {
@@ -78,11 +77,11 @@ public class Sale {
 		this.date = date;
 	}
 
-	public Seller getSeller() {
+	public SellerDTO getSeller() {
 		return seller;
 	}
 
-	public void setSeller(Seller seller) {
+	public void setSeller(SellerDTO seller) {
 		this.seller = seller;
 	}
 	
