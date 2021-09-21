@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {Sale, SalePage} from "../../types/sale";
+import {SalePage} from "../../types/sale";
 import axios from "axios";
 import {BASE_URL} from "../../utils/requests";
 import {formatLocalDate} from "../../utils/format";
